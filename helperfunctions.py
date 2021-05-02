@@ -6,7 +6,7 @@ from typing import List, Tuple
 
 class BBconversion:
     """Dataloader currently the directory path and augmentation boleen. 
-    Images are pulled and annotations are taken from the text file and converted from YOLO to xyxy. Return is a tuple with a list and np array. This makes the daa ready for Selective Segmentation."""
+    Images are pulled and annotations are taken from the text file and converted from YOLO to xyxy. Return is a tuple with a list and np array. This makes the data ready for Selective Segmentation."""
     def __init__(self, directory: str):
         self.directory = directory
         self.annotation_path = list(Path(self.directory).glob('*.txt')) # path for annotations
@@ -90,7 +90,7 @@ def calculate_IOU(coordinatesA, coordinatesB):
     if xRight >= xLeft and yBottom >= yTop:
         # area of the rectangle of intersection
         intersection = (xRight - xLeft + 1) * (yBottom - yTop + 1)
-        print(f'Intersection is {intersection}')
+        # print(f'Intersection is {intersection}')
 
         # Area of both boxes and get union
         areaA = (coordinatesA[2] - coordinatesA[0] + 1) * (coordinatesA[3] - coordinatesA[1] + 1)
@@ -98,7 +98,7 @@ def calculate_IOU(coordinatesA, coordinatesB):
         areaB = (coordinatesB[2] - coordinatesB[0] + 1) * (coordinatesB[3] - coordinatesB[1] + 1)
         # print(f'Area of B is {areaB}')
         union = float(areaA + areaB - intersection)
-        print(f'Union is {union}')
+        # print(f'Union is {union}')
 
         iou = intersection/union
     else:
@@ -109,6 +109,7 @@ def calculate_IOU(coordinatesA, coordinatesB):
 # print(f"IOU is {reply}")
 
 # this prints the ss results on the cow image to see that it works
+# only shows 30 SS boxes at a time
 def visualiseSS(yourImage, boxesVariable):
     for region in range(0, len(boxesVariable), 30):
         copy = yourImage.copy()

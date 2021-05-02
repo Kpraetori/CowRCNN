@@ -26,9 +26,10 @@ INPUT_DIMS = (224, 224)
 ss = cv2.ximgproc.segmentation.createSelectiveSearchSegmentation()
 
 # Total counts for cow faces and counts for background images. Used for naming convention
+# TODO: remove unnecessary counters to speed up the loop!
 countCowFaces = 0
 countBackground = 0
-imagecount = 0
+
 
 # Where the new files will be saved
 cowPath = 'results/CowFaces'
@@ -67,8 +68,8 @@ for groundTruthBB, image in cowBBandImage:
             if iou > 0.5 and yesCowROI < MAX_COWFACE_YES:
                 print(f"Face detected at IOU {iou}")
                 (regionStartX, regionStartY, regionEndX, regionEndY) = boxRegion
-                print(f"The ground truth is {BB}")
-                print(f"The box region from selective search is {boxRegion}")
+                # print(f"The ground truth is {BB}")
+                # print(f"The box region from selective search is {boxRegion}")
                 roi = image[regionStartY:regionEndY, regionStartX:regionEndX]
                 save_ROI(roi, countCowFaces, cowPath, Face=True)
                 countCowFaces += 1
@@ -87,8 +88,7 @@ for groundTruthBB, image in cowBBandImage:
     print(f'No Cow ROI count is {noCowROI}')
     print(f'Total background images {countBackground}')
     print(f'Total cow face images {countCowFaces}')
-    imagecount += 1
-    print(f'Finished with loop. {imagecount} processed so far.')
+
 
     # break              
 
