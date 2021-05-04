@@ -8,7 +8,7 @@ import numpy as np
 from helperfunctions import calculate_IOU, visualiseSS, save_ROI, cowfaceBB, BBconversion, collect_test_data
 
 # Sets overall data directory path
-DIR_PATH = "sourceData" # should rename to source data
+DIR_PATH = "sourceDataSubset3" # should rename to source data
 
 # Dictates the MAXIMUM number or region proposals allowed for training and inference (at the end)
 REGION_PROPOSALS = 2000 # test number use 2000 in final version
